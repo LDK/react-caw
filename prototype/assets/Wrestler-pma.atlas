@@ -1,0 +1,600 @@
+Wrestler.png
+size: 1985,681
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ColdStone/Facial Hair 1
+  rotate: false
+  xy: 2, 4
+  size: 205, 127
+  orig: 205, 127
+  offset: 0, 0
+  index: -1
+ColdStone/Facial Hair 2
+  rotate: true
+  xy: 1843, 157
+  size: 105, 79
+  orig: 105, 79
+  offset: 0, 0
+  index: -1
+ColdStone/Facial Hair 3 SE
+  rotate: false
+  xy: 332, 240
+  size: 265, 156
+  orig: 288, 166
+  offset: 0, 4
+  index: -1
+ColdStone/Facial Hair 4 SE
+  rotate: true
+  xy: 1924, 185
+  size: 81, 37
+  orig: 157, 169
+  offset: 49, 95
+  index: -1
+ColdStone/Facial Hair 8 SE
+  rotate: true
+  xy: 1924, 185
+  size: 81, 37
+  orig: 157, 169
+  offset: 49, 95
+  index: -1
+ColdStone/Facial Hair 5 SE
+  rotate: false
+  xy: 209, 77
+  size: 105, 54
+  orig: 105, 79
+  offset: 0, 25
+  index: -1
+ColdStone/Facial Hair 6 SE
+  rotate: true
+  xy: 1574, 26
+  size: 105, 79
+  orig: 105, 79
+  offset: 0, 0
+  index: -1
+ColdStone/Facial Hair 7 SE
+  rotate: false
+  xy: 1415, 532
+  size: 208, 147
+  orig: 288, 166
+  offset: 19, 13
+  index: -1
+ColdStone/Hair Back 1
+  rotate: false
+  xy: 1381, 226
+  size: 99, 122
+  orig: 99, 123
+  offset: 0, 0
+  index: -1
+ColdStone/Hair Back 4 SE
+  rotate: true
+  xy: 649, 397
+  size: 282, 287
+  orig: 282, 288
+  offset: 0, 1
+  index: -1
+ColdStone/Hair Front 1
+  rotate: false
+  xy: 2, 407
+  size: 328, 272
+  orig: 328, 272
+  offset: 0, 0
+  index: -1
+ColdStone/Hair Front 2.png
+  rotate: false
+  xy: 1210, 520
+  size: 203, 159
+  orig: 203, 192
+  offset: 0, 33
+  index: -1
+ColdStone/Hair Front 3 SE
+  rotate: false
+  xy: 2, 133
+  size: 328, 272
+  orig: 328, 272
+  offset: 0, 0
+  index: -1
+ColdStone/Hair Front 4 SE
+  rotate: false
+  xy: 332, 398
+  size: 315, 281
+  orig: 422, 322
+  offset: 31, 0
+  index: -1
+ColdStone/Head Base 1
+  rotate: false
+  xy: 938, 397
+  size: 270, 282
+  orig: 276, 282
+  offset: 0, 0
+  index: -1
+ColdStone/Left Boot Laces 1
+  rotate: true
+  xy: 1121, 338
+  size: 57, 87
+  orig: 63, 89
+  offset: 0, 0
+  index: -1
+ColdStone/Left Boot Top 1
+  rotate: false
+  xy: 1150, 67
+  size: 93, 125
+  orig: 99, 125
+  offset: 4, 0
+  index: -1
+ColdStone/Left Ear 1
+  rotate: true
+  xy: 1771, 83
+  size: 55, 69
+  orig: 55, 69
+  offset: 0, 0
+  index: -1
+ColdStone/Left Eye 1
+  rotate: true
+  xy: 910, 2
+  size: 35, 41
+  orig: 35, 41
+  offset: 0, 0
+  index: -1
+ColdStone/Left Eye Closed
+  rotate: false
+  xy: 1908, 6
+  size: 46, 17
+  orig: 46, 17
+  offset: 0, 0
+  index: -1
+ColdStone/Left Eyebrow 1
+  rotate: false
+  xy: 910, 39
+  size: 54, 28
+  orig: 56, 28
+  offset: 0, 0
+  index: -1
+ColdStone/Left Eyebrow 2
+  rotate: true
+  xy: 1958, 423
+  size: 56, 25
+  orig: 56, 28
+  offset: 0, 2
+  index: -1
+ColdStone/Left Foot 1
+  rotate: false
+  xy: 374, 7
+  size: 162, 66
+  orig: 168, 82
+  offset: 4, 4
+  index: -1
+ColdStone/Left Foot 1 Bent
+  rotate: true
+  xy: 509, 75
+  size: 163, 96
+  orig: 168, 112
+  offset: 5, 16
+  index: -1
+ColdStone/Left Hand Back Fist 1
+  rotate: true
+  xy: 969, 2
+  size: 80, 102
+  orig: 80, 102
+  offset: 0, 0
+  index: -1
+ColdStone/Left Hand Open 1
+  rotate: false
+  xy: 1245, 113
+  size: 118, 125
+  orig: 118, 125
+  offset: 0, 0
+  index: -1
+ColdStone/Left Hand Palm Fist 1
+  rotate: false
+  xy: 1655, 38
+  size: 84, 93
+  orig: 84, 93
+  offset: 0, 0
+  index: -1
+ColdStone/Left Lower Arm 1
+  rotate: true
+  xy: 1888, 268
+  size: 111, 70
+  orig: 111, 70
+  offset: 0, 0
+  index: -1
+ColdStone/Left Lower Elbow Pad 1
+  rotate: true
+  xy: 1725, 9
+  size: 27, 58
+  orig: 27, 58
+  offset: 0, 0
+  index: -1
+ColdStone/Left Lower Knee Pad 1
+  rotate: true
+  xy: 1733, 415
+  size: 98, 66
+  orig: 140, 75
+  offset: 39, 3
+  index: -1
+ColdStone/Left Lower Leg 1
+  rotate: false
+  xy: 1571, 133
+  size: 98, 117
+  orig: 103, 188
+  offset: 5, 71
+  index: -1
+ColdStone/Left Lower Pant Leg 1
+  rotate: true
+  xy: 1245, 13
+  size: 98, 117
+  orig: 103, 188
+  offset: 5, 71
+  index: -1
+ColdStone/Left Shoe 1
+  rotate: true
+  xy: 1394, 350
+  size: 168, 82
+  orig: 168, 82
+  offset: 0, 0
+  index: -1
+ColdStone/Left Shoe 1 Bent
+  rotate: false
+  xy: 607, 169
+  size: 168, 112
+  orig: 168, 112
+  offset: 0, 0
+  index: -1
+ColdStone/Left Upper Arm 1
+  rotate: false
+  xy: 607, 69
+  size: 179, 98
+  orig: 179, 98
+  offset: 0, 0
+  index: -1
+ColdStone/Left Upper Elbow Pad 1
+  rotate: true
+  xy: 1912, 25
+  size: 54, 67
+  orig: 54, 67
+  offset: 0, 0
+  index: -1
+ColdStone/Left Upper Knee Pad 1
+  rotate: false
+  xy: 1073, 2
+  size: 103, 63
+  orig: 140, 75
+  offset: 34, 6
+  index: -1
+ColdStone/Left Upper Leg 1
+  rotate: true
+  xy: 1813, 581
+  size: 98, 170
+  orig: 98, 170
+  offset: 0, 0
+  index: -1
+ColdStone/Left Upper Pant Leg 1
+  rotate: true
+  xy: 1813, 481
+  size: 98, 170
+  orig: 98, 170
+  offset: 0, 0
+  index: -1
+ColdStone/Left Wrist Tape 1
+  rotate: true
+  xy: 1492, 106
+  size: 20, 59
+  orig: 20, 59
+  offset: 0, 0
+  index: -1
+ColdStone/Mouth 1
+  rotate: false
+  xy: 1576, 515
+  size: 42, 15
+  orig: 57, 33
+  offset: 11, 7
+  index: -1
+ColdStone/Mouth Grimace 1
+  rotate: true
+  xy: 1741, 51
+  size: 82, 26
+  orig: 82, 26
+  offset: 0, 0
+  index: -1
+ColdStone/Mouth Shocked 1
+  rotate: false
+  xy: 1655, 10
+  size: 68, 26
+  orig: 82, 26
+  offset: 11, 0
+  index: -1
+ColdStone/Mouth Smirk 1
+  rotate: true
+  xy: 1958, 383
+  size: 38, 18
+  orig: 40, 20
+  offset: 2, 2
+  index: -1
+ColdStone/Neck 1
+  rotate: false
+  xy: 764, 7
+  size: 69, 60
+  orig: 69, 60
+  offset: 0, 0
+  index: -1
+ColdStone/Nose 1
+  rotate: true
+  xy: 1917, 111
+  size: 44, 66
+  orig: 44, 66
+  offset: 0, 0
+  index: -1
+ColdStone/Nose 2 SE
+  rotate: false
+  xy: 1746, 345
+  size: 40, 68
+  orig: 40, 68
+  offset: 0, 0
+  index: -1
+ColdStone/Nose 3 SE
+  rotate: true
+  xy: 1769, 42
+  size: 39, 68
+  orig: 40, 68
+  offset: 0, 0
+  index: -1
+ColdStone/Nose 4 SE
+  rotate: true
+  xy: 1842, 51
+  size: 48, 68
+  orig: 60, 68
+  offset: 6, 0
+  index: -1
+ColdStone/Right Boot Laces 1
+  rotate: true
+  xy: 1701, 253
+  size: 76, 85
+  orig: 82, 86
+  offset: 2, 1
+  index: -1
+ColdStone/Right Boot Top 1
+  rotate: false
+  xy: 1482, 255
+  size: 90, 113
+  orig: 112, 177
+  offset: 9, 1
+  index: -1
+ColdStone/Right Eye 1
+  rotate: true
+  xy: 1178, 2
+  size: 63, 59
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+ColdStone/Right Eye Closed
+  rotate: false
+  xy: 1574, 8
+  size: 52, 16
+  orig: 52, 16
+  offset: 0, 0
+  index: -1
+ColdStone/Right Eyebrow 1
+  rotate: false
+  xy: 835, 13
+  size: 73, 54
+  orig: 73, 54
+  offset: 0, 0
+  index: -1
+ColdStone/Right Eyebrow 2
+  rotate: false
+  xy: 1843, 101
+  size: 72, 54
+  orig: 73, 54
+  offset: 0, 0
+  index: -1
+ColdStone/Right Foot 1
+  rotate: false
+  xy: 209, 2
+  size: 163, 71
+  orig: 168, 82
+  offset: 4, 4
+  index: -1
+ColdStone/Right Foot 1 Bent
+  rotate: true
+  xy: 1478, 370
+  size: 160, 96
+  orig: 168, 112
+  offset: 8, 16
+  index: -1
+ColdStone/Right Hand Back Fist 1
+  rotate: false
+  xy: 1364, 2
+  size: 113, 102
+  orig: 113, 102
+  offset: 0, 0
+  index: -1
+ColdStone/Right Hand Near Open 1
+  rotate: false
+  xy: 1365, 106
+  size: 125, 118
+  orig: 125, 118
+  offset: 0, 0
+  index: -1
+ColdStone/Right Hand Palm Fist 1
+  rotate: true
+  xy: 1479, 3
+  size: 101, 93
+  orig: 101, 93
+  offset: 0, 0
+  index: -1
+ColdStone/Right Lower Arm 1
+  rotate: true
+  xy: 1574, 252
+  size: 77, 125
+  orig: 77, 125
+  offset: 0, 0
+  index: -1
+ColdStone/Right Lower Elbow Pad 1
+  rotate: false
+  xy: 1917, 81
+  size: 62, 28
+  orig: 62, 28
+  offset: 0, 0
+  index: -1
+ColdStone/Right Lower Knee Pad 1
+  rotate: false
+  xy: 538, 2
+  size: 110, 65
+  orig: 114, 65
+  offset: 4, 0
+  index: -1
+ColdStone/Right Lower Leg 1
+  rotate: true
+  xy: 947, 284
+  size: 111, 172
+  orig: 112, 177
+  offset: 0, 5
+  index: -1
+ColdStone/Right Lower Leg 2
+  rotate: true
+  xy: 599, 283
+  size: 112, 172
+  orig: 112, 188
+  offset: 0, 16
+  index: -1
+ColdStone/Right Lower Pant Leg 1
+  rotate: true
+  xy: 773, 283
+  size: 112, 172
+  orig: 112, 177
+  offset: 0, 5
+  index: -1
+ColdStone/Right Shoe 1
+  rotate: false
+  xy: 1576, 331
+  size: 168, 82
+  orig: 168, 82
+  offset: 0, 0
+  index: -1
+ColdStone/Right Shoe 1 Bent
+  rotate: false
+  xy: 777, 169
+  size: 168, 112
+  orig: 168, 112
+  offset: 0, 0
+  index: -1
+ColdStone/Right Upper Arm 1
+  rotate: true
+  xy: 947, 184
+  size: 98, 179
+  orig: 98, 179
+  offset: 0, 0
+  index: -1
+ColdStone/Right Upper Elbow Pad 1
+  rotate: false
+  xy: 1839, 4
+  size: 67, 45
+  orig: 67, 45
+  offset: 0, 0
+  index: -1
+ColdStone/Right Upper Knee Pad 1
+  rotate: false
+  xy: 650, 4
+  size: 112, 63
+  orig: 114, 65
+  offset: 2, 2
+  index: -1
+ColdStone/Right Upper Leg 1
+  rotate: true
+  xy: 1576, 415
+  size: 98, 155
+  orig: 98, 155
+  offset: 0, 0
+  index: -1
+ColdStone/Right Upper Pant Leg 1
+  rotate: true
+  xy: 1801, 381
+  size: 98, 155
+  orig: 98, 155
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Body 1
+  rotate: true
+  xy: 1210, 350
+  size: 168, 182
+  orig: 168, 182
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Body Bodysuit
+  rotate: true
+  xy: 1625, 515
+  size: 164, 186
+  orig: 164, 186
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Far Lower Sleeve 1
+  rotate: true
+  xy: 1771, 140
+  size: 111, 70
+  orig: 111, 70
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Far Upper Sleeve 1
+  rotate: true
+  xy: 1671, 135
+  size: 115, 98
+  orig: 115, 98
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Far Upper Sleeve Bodysuit
+  rotate: false
+  xy: 788, 69
+  size: 179, 98
+  orig: 179, 98
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Near Lower Sleeve 1
+  rotate: false
+  xy: 1492, 128
+  size: 77, 125
+  orig: 77, 125
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Near Upper Sleeve 1
+  rotate: false
+  xy: 1788, 264
+  size: 98, 115
+  orig: 98, 115
+  offset: 0, 0
+  index: -1
+ColdStone/Shirt Near Upper Sleeve Bodysuit
+  rotate: true
+  xy: 969, 84
+  size: 98, 179
+  orig: 98, 179
+  offset: 0, 0
+  index: -1
+ColdStone/Torso 1
+  rotate: true
+  xy: 332, 75
+  size: 163, 175
+  orig: 163, 175
+  offset: 0, 0
+  index: -1
+ColdStone/Trunks 1
+  rotate: true
+  xy: 1128, 194
+  size: 142, 108
+  orig: 142, 108
+  offset: 0, 0
+  index: -1
+ColdStone/Trunks 2
+  rotate: false
+  xy: 1238, 240
+  size: 141, 108
+  orig: 141, 108
+  offset: 0, 0
+  index: -1
+ColdStone/transparent
+  rotate: false
+  xy: 1571, 252
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
