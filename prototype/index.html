@@ -2,7 +2,7 @@
 <head>
 	<script src="./build/spine-webgl.js"></script>
 	<link rel="stylesheet" href="bootstrap.min.css">
-</head>
+</head>()
 <style>
 * { margin: 0; padding: 0; }
 body, html { height: 100%;}
@@ -109,11 +109,28 @@ function init () {
 	requestAnimationFrame(loadSkeleton);
 }
 
+function setSlotColor(skeleton,slotName,color) {
+	var slotColor = skeleton.findSlot(slotName).color;
+	slotColor.r = color.r;
+	slotColor.g = color.g;
+	slotColor.b = color.b;
+	slotColor.a = color.a;
+}
+
+const skinSlots = ["Head","Nose"];
+
+function setSkinColor(skeleton,color) {
+	for (var i in skinSlots) {
+		setSlotColor(skeleton,skinSlots[i],color);
+	}
+}
+
 function loadSkeleton () {
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
 		figure = loadFigure(character.defaultAnim, true);
-		console.log('figure',figure);
+		// console.log('figure',figure);
+		setSkinColor(figure.skeleton,{ r: .85, g: .75, b: .7, a: 1});
 		lastFrameTime = Date.now() / 1000;
 		requestAnimationFrame(renderFigure); // Loading is done, call render every frame.
 	} else {
@@ -148,6 +165,7 @@ function loadFigure (initialAnimation, premultipliedAlpha) {
 	var animationStateData = new spine.AnimationStateData(skeleton.data);
 	var animationState = new spine.AnimationState(animationStateData);
 	animationState.setAnimation(0, initialAnimation, true);
+	
 
 	// Pack everything up and return to caller.
 	return { skeleton: skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
