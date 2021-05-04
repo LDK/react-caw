@@ -118,7 +118,7 @@ function setSlotColor(skeleton,slotName,color) {
 	slotColor.a = color.a;
 }
 
-const skinSlots = ["Head","Nose"];
+const skinSlots = ["Head","Nose","arm_upper_far","arm_lower_far","hand_far","leg_upper_far","leg_lower_far","Far Shin","waist","torso","neck","Right Ear","leg_upper_near","leg_lower_near","Near Shin","foot_near","arm_upper_near","arm_lower_near","hand_near"];
 
 function setSkinColor(skeleton,color) {
 	for (var i in skinSlots) {
@@ -130,8 +130,8 @@ function loadSkeleton () {
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
 		figure = loadFigure(character.defaultAnim, true);
-		// console.log('figure',figure);
-		setSkinColor(figure.skeleton,{ r: .85, g: .75, b: .7, a: 1});
+		console.log('figure',figure);
+		setSkinColor(figure.skeleton,{ r: .75, g: .6, b: .5, a: 1});
 		lastFrameTime = Date.now() / 1000;
 		requestAnimationFrame(renderFigure); // Loading is done, call render every frame.
 	} else {
