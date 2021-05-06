@@ -177,12 +177,12 @@ class EditorPanel extends React.Component {
 		}
 		return (
 			<div id="editorPanel">
-				{openPanel}
 				<ul className="tabs">
 					<li className={(this.state.selectedPanel == 'general') ? ' selected' : '' }><a onClick={() => this.openPanel('general')} className="d-block">General</a></li>
 					<li className={(this.state.selectedPanel == 'physical') ? ' selected' : '' }><a onClick={() => this.openPanel('physical')} className="d-block">Physical</a></li>
 					<li className={(this.state.selectedPanel == 'gear') ? ' selected' : '' }><a onClick={() => this.openPanel('gear')} className="d-block">Gear</a></li>
 				</ul>
+				{openPanel}
 			</div>
 		);
 	}

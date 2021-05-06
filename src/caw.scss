@@ -1,3 +1,31 @@
+// Variables
+$xs: 320px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$hd: 1800px;
+
+// Mixins
+@mixin atmost_res($res) {
+  @media (max-width: $res) { @content; }
+}
+@mixin atleast_res($res) {
+  @media (min-width: $res) { @content; }
+}
+@mixin below_res($res) {
+	@include atmost_res($res - 1) { @content; }
+}
+@mixin above_res($res) {
+	@include atleast_res($res + 1) { @content; }
+}
+@mixin between_res($from,$to) {
+    @include atleast_res($from) { 
+        @include atmost_res($to) { @content; } 
+    }
+}
+
+
 * { margin: 0; padding: 0; }
 body, html { height: 100%;}
 body {
@@ -49,15 +77,23 @@ $editorPanelBg: #CCC;
 	border: 1px solid #DEDEDE;
 	background: $editorPanelBg;
 	position: relative;
-	padding-left: 200px;
+	@include atleast_res($md) {
+		padding-left: 200px;
+	}
 	height: 100%;
 	ul.tabs {
 		list-style-type: none;
 		width: 188px;
-		position: absolute;
-		top: 0;
-		left: 0;
+		@include atleast_res($md) {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 		li {
+			@include below_res($md) {
+				display: inline-block;
+				width: 33%;
+			} 
 			color: black;
 			background: white;
 			border-right: black;
