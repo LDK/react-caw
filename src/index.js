@@ -36,8 +36,48 @@ function rgb255(rgb) {
 const DEFAULT_COLORS = {
 	'Shirt Body': rgb(1,1,1),
 	'Shirt Sleeves': rgb(1,1,1),
-	'trunks': rgb(0,0,0)
+	'trunks': rgb(0,0,0),
+	'Pant Legs': rgb(0,0,0)
 };
+const DEFAULT_STYLES = {
+	'Shirt Body': 'None',
+	'Shirt Sleeves': 'None',
+	'trunks': 'Style 1',
+	'Pant Legs': 'None'
+};
+const PART_STYLES = {
+	'Shirt Body': ['None','Style 1','Bodysuit'],
+	'Shirt Sleeves': ['None','Style 1','Bodysuit'],
+	'trunks': ['Style 1','Style 2'],
+	'Pant Legs': ['None','Tights 1']
+};
+function ucfirst(text) {
+	return text.charAt(0).toUpperCase() + text.slice(1);
+}
+function PartRow(props) {
+	var part = props.part;
+	var editor = props.editor;
+	var styleValue = editor.parts[part].attachment || DEFAULT_STYLES[part];
+	var options = [];
+	for (var i in PART_STYLES[part]) {
+		var style = PART_STYLES[part][i];
+		options.push(<option value={style}>{style}</option>);
+	}
+	return (
+		<div className="row no-gutters partRow my-2">
+			<div className="col-9">
+				<label>{ucfirst(part)}</label>
+				<select className="stylePicker" id={part} value={styleValue} onChange={editor.handleStyleChange} rel={part}>
+					{options}
+				</select>
+			</div>
+			<div className="col-3">
+				<label>Color</label>
+				<ColorSwatch color={editor.parts[part].color} part={part} editor={editor} onClick={editor.openColorPicker} />
+			</div>
+		</div>
+	);
+}
 class EditorPanel extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,9 +95,17 @@ class EditorPanel extends React.Component {
 				attachment: 'None',
 				color: DEFAULT_COLORS['Shirt Body']
 			},
+			'trunks': {
+				attachment: 'Style 1',
+				color: DEFAULT_COLORS['trunks']
+			},
 			'Shirt Sleeves': {
 				attachment: 'None',
 				color: DEFAULT_COLORS['Shirt Sleeves']
+			},
+			'Pant Legs': {
+				attachment: 'None',
+				color: DEFAULT_COLORS['Pant Legs']
 			}
 		};
 		this.handleColorChange = this.handleColorChange.bind(this);
@@ -126,38 +174,13 @@ class EditorPanel extends React.Component {
 				case 'gear':
 					switch (this.state.subpanel) {
 						case 'clothing':
-							console.log('parts in clothing',this.parts);
 							openPanel = (
 								<div id="clothing-panel">
 									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Gear</a>
-									<div className="row no-gutters partRow my-2">
-										<div className="col-9">
-											<label>Shirt Base</label>
-											<select className="stylePicker" id="shirt-base" value={this.parts['Shirt Body'].attachment || "None"} onChange={this.handleStyleChange} rel="Shirt Body">
-												<option value="None">None</option>
-												<option value="Style 1">Style 1</option>
-												<option value="Bodysuit">Bodysuit</option>
-											</select>
-										</div>
-										<div className="col-3">
-											<label>Color</label>
-											<ColorSwatch color={this.parts['Shirt Body'].color} part="Shirt Body" editor={this} onClick={this.openColorPicker} />
-										</div>
-									</div>
-									<div className="row no-gutters partRow my-2">
-										<div className="col-9">
-											<label>Shirt Sleeves</label>
-											<select className="stylePicker" id="shirt-Sleeves" value={this.parts['Shirt Sleeves'].attachment || "None"} onChange={this.handleStyleChange} rel="Shirt Sleeves">
-												<option value="None">None</option>
-												<option value="Style 1">Style 1</option>
-												<option value="Bodysuit">Bodysuit</option>
-											</select>
-										</div>
-										<div className="col-3">
-											<label>Color</label>
-											<ColorSwatch color={this.parts['Shirt Sleeves'].color} part="Shirt Sleeves" editor={this} onClick={this.openColorPicker} />
-										</div>
-									</div>
+									<PartRow part="trunks" editor={this} />
+									<PartRow part="Pant Legs" editor={this} />
+									<PartRow part="Shirt Body" label="Shirt Base" editor={this} />
+									<PartRow part="Shirt Sleeves" editor={this} />
 								</div>
 							);
 						break;
@@ -211,9 +234,10 @@ class App extends React.Component {
 		};
 		this.slotGroups = {}
 		this.slotGroups.skin = ["Head","Nose","arm_upper_far","arm_lower_far","hand_far","leg_upper_far","leg_lower_far","waist","torso","neck","Right Ear","leg_upper_near","leg_lower_near","foot_near","arm_upper_near","arm_lower_near","hand_near"];
-		this.slotGroups.pantLegs = ["Far Upper Pant Leg","Near Upper Pant Leg","Far Lower Pant Leg","Near Lower Pant Leg"];
+		this.slotGroups['Pant Legs'] = ["Far Upper Pant Leg","Near Upper Pant Leg","Far Lower Pant Leg","Near Lower Pant Leg"];
 		this.slotGroups.shoes = ["shoe_far","shoe_near"];
 		this.slotGroups.shins = ["Far Shin","Near Shin"];
+		this.slotGroups.trunks = ["trunks"];
 		this.slotGroups['Shirt Body'] = ['Shirt Body'];
 		this.slotGroups['Shirt Sleeves'] = ["Shirt Far Upper Sleeve","Shirt Near Upper Sleeve","Shirt Far Lower Sleeve","Shirt Near Lower Sleeve"];
 	}
@@ -335,7 +359,6 @@ class App extends React.Component {
 			initialAnimation = skeletonData.animations[0].name;
 		}
 		this.skeleton = new spine.Skeleton(skeletonData);
-		console.log('skel',this.skeleton);
 		if (this.spineAsset.skin) {
 			this.skeleton.setSkinByName(this.spineAsset.skin);
 		}
