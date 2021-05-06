@@ -43,3 +43,87 @@ canvas {
 }
 @media (min-width:1800px) {
 }
+
+$editorPanelBg: #CCC;
+#editorPanel {
+	border: 1px solid #DEDEDE;
+	background: $editorPanelBg;
+	position: relative;
+	padding-left: 200px;
+	height: 100%;
+	ul.tabs {
+		list-style-type: none;
+		width: 188px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		li {
+			color: black;
+			background: white;
+			border-right: black;
+			&.selected {
+				background: $editorPanelBg;
+				border-right: $editorPanelBg;
+			}
+			a {
+				text-decoration: none !important;
+			}
+		}
+	}
+	label {
+		font-size: 1.25rem;
+		font-weight: 500;
+		display: block;
+	}
+	.colorSwatch {
+		height: 18px;
+		width: 18px;
+		border-radius: 25%;
+	}
+	.partRow {
+		label {
+			font-size: 1rem;
+			font-weight: 400;
+		}
+	}
+}
+
+a {
+	cursor: pointer;
+	&.arrow-link {
+		&::after {
+			content: '→';
+			display: inline;
+			position: relative;
+			left: .33rem;
+			transition: all .25s;
+			font-weight: 300;
+		}
+		&:hover {
+			font-weight: 400;
+			text-decoration: underline;
+			&::after {
+				left: .85rem;
+				transition: all .25s;
+				font-weight: 700;
+			}
+		}
+	}
+	&.arrow-link-back {
+		&::before {
+			content: '←';
+			display: inline;
+			margin-right: .33rem;
+			transition: all .25s;
+			font-weight: 300;
+		}
+		&:hover {
+			font-weight: 400;
+			text-decoration: underline;
+			&::before {
+				transition: all .25s;
+				font-weight: 700;
+			}
+		}
+	}
+}
