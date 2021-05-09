@@ -17,6 +17,8 @@ class App extends React.Component {
 		this.setSlotColor = this.setSlotColor.bind(this);
 		this.setPartColor = this.setPartColor.bind(this);
 		this.setPartStyle = this.setPartStyle.bind(this);
+		this.setAnimation = this.setAnimation.bind(this);
+		this.cycleAnimation = this.cycleAnimation.bind(this);
 		this.calculateSetupPoseBounds = this.calculateSetupPoseBounds.bind(this);
 		this.mvp = new spine.webgl.Matrix4();
 	}
@@ -125,6 +127,7 @@ class App extends React.Component {
 				}
 			}
 			this.lastFrameTime = Date.now() / 1000;
+			this.animInterval = setInterval(this.cycleAnimation,5000);
 			requestAnimationFrame(this.renderFigure); // Loading is done, call render every frame.
 		} else {
 			requestAnimationFrame(this.loadSkeleton);
@@ -162,6 +165,14 @@ class App extends React.Component {
 		// Pack everything up and return to caller.
 		return { skeleton: this.skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
 	}
+	cycleAnimation () {
+		this.animIndex = this.animIndex || 0;
+		this.animIndex++;
+		if (this.animIndex >= Config.animationLoop.length) {
+			this.animIndex = 0;
+		}
+		this.setAnimation(Config.animationLoop[this.animIndex]);
+	}
 	setSlotColor (slotName,color) {
 		var slotColor = this.skeleton.findSlot(slotName).color;
 		slotColor.r = color.r;
@@ -178,6 +189,9 @@ class App extends React.Component {
 				this.editor.parts[part].color = color;
 			}
 		}
+	}
+	setAnimation(animation) {
+		this.figure.state.setAnimation(0, animation, true);
 	}
 	setPartStyle(part,attachment) {
 		if (!!part && !!Config.slotGroups[part]) {
