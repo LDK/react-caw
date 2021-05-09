@@ -37,19 +37,46 @@ const DEFAULT_COLORS = {
 	'Shirt Body': rgb(1,1,1),
 	'Shirt Sleeves': rgb(1,1,1),
 	'trunks': rgb(0,0,0),
-	'Pant Legs': rgb(0,0,0)
+	'wrist': rgb(1,1,1),
+	'Pant Legs': rgb(0,0,0),
+	'shoes': rgb(0,0,0),
+	'shins': rgb(0,0,0),
+	'laces': rgb(1,1,1),
+	'Hair Front': rgb(0,0,0),
+	'Hair Back': rgb(0,0,0),
+	'Facial Hair': rgb(0,0,0),
+	'Elbow Pads': rgb(0,0,0),
+	'Knee Pads': rgb(0,0,0)
 };
 const DEFAULT_STYLES = {
 	'Shirt Body': 'None',
 	'Shirt Sleeves': 'None',
 	'trunks': 'Style 1',
-	'Pant Legs': 'None'
+	'wrist': 'None',
+	'shoes': 'Style 1',
+	'shins': 'Boot Top 1',
+	'laces': 'Style 1',
+	'Pant Legs': 'None',
+	'Hair Front': 'None',
+	'Hair Back': 'None',
+	'Facial Hair': 'None',
+	'Elbow Pads': 'Style 1',
+	'Knee Pads': 'Style 1'
 };
 const PART_STYLES = {
 	'Shirt Body': ['None','Style 1','Bodysuit'],
 	'Shirt Sleeves': ['None','Style 1','Bodysuit'],
 	'trunks': ['Style 1','Style 2'],
-	'Pant Legs': ['None','Tights 1']
+	'wrist': ['None','Tape 1'],
+	'Pant Legs': ['None','Tights 1'],
+	'shoes': ['Style 1'],
+	'shins': ['None', 'Boot Top 1'],
+	'laces': ['None','Style 1'],
+	'Hair Front': ['None','Style 1','Style 2','Style 3','Style 4'],
+	'Hair Back': ['None','Style 1','Style 4'],
+	'Facial Hair': ['None','Style 1','Style 2','Style 3','Style 4','Style 5','Style 6','Style 7','Style 8'],
+	'Elbow Pads': ['None','Style 1'],
+	'Knee Pads': ['None','Style 1']
 };
 function ucfirst(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
@@ -61,7 +88,7 @@ function PartRow(props) {
 	var options = [];
 	for (var i in PART_STYLES[part]) {
 		var style = PART_STYLES[part][i];
-		options.push(<option value={style}>{style}</option>);
+		options.push(<option key={i} value={style}>{style}</option>);
 	}
 	return (
 		<div className="row no-gutters partRow my-2">
@@ -92,20 +119,56 @@ class EditorPanel extends React.Component {
 				color: { r: .4, g: .33, b: .2, a: 1 }
 			},
 			'Shirt Body': {
-				attachment: 'None',
+				attachment: DEFAULT_STYLES['Shirt Body'],
 				color: DEFAULT_COLORS['Shirt Body']
 			},
 			'trunks': {
-				attachment: 'Style 1',
+				attachment: DEFAULT_STYLES['trunks'],
 				color: DEFAULT_COLORS['trunks']
 			},
+			'wrist': {
+				attachment: DEFAULT_STYLES['wrist'],
+				color: DEFAULT_COLORS['wrist']
+			},
 			'Shirt Sleeves': {
-				attachment: 'None',
+				attachment: DEFAULT_STYLES['Shirt Sleeves'],
 				color: DEFAULT_COLORS['Shirt Sleeves']
 			},
 			'Pant Legs': {
-				attachment: 'None',
+				attachment: DEFAULT_STYLES['Pant Legs'],
 				color: DEFAULT_COLORS['Pant Legs']
+			},
+			'shoes': {
+				attachment: DEFAULT_STYLES['shoes'],
+				color: DEFAULT_COLORS['shoes']
+			},
+			'Hair Front': {
+				attachment: DEFAULT_STYLES['Hair Front'],
+				color: DEFAULT_COLORS['Hair Front']
+			},
+			'Hair Back': {
+				attachment: DEFAULT_STYLES['Hair Back'],
+				color: DEFAULT_COLORS['Hair Back']
+			},
+			'Facial Hair': {
+				attachment: DEFAULT_STYLES['Facial Hair'],
+				color: DEFAULT_COLORS['Facial Hair']
+			},
+			'shins': {
+				attachment: DEFAULT_STYLES['shins'],
+				color: DEFAULT_COLORS['shins']
+			},
+			'laces': {
+				attachment: DEFAULT_STYLES['laces'],
+				color: DEFAULT_COLORS['laces']
+			},
+			'Knee Pads': {
+				attachment: DEFAULT_STYLES['Knee Pads'],
+				color: DEFAULT_COLORS['Knee Pads']
+			},
+			'Elbow Pads': {
+				attachment: DEFAULT_STYLES['Elbow Pads'],
+				color: DEFAULT_COLORS['Elbow Pads']
 			}
 		};
 		this.handleColorChange = this.handleColorChange.bind(this);
@@ -151,6 +214,9 @@ class EditorPanel extends React.Component {
 		this.props.app.setPartStyle(partName,attachment);
 		this.setState({ selectedPart: partName })
 	}
+	componentDidMount() {
+		this.props.app.initCanvas();
+	}
 	render() {
 		var openPanel;
 		if (!this.state.colorPickerOpen) {
@@ -168,6 +234,9 @@ class EditorPanel extends React.Component {
 						<div id="physical-panel">
 							<label>Skin Color</label>
 							<ColorSwatch part="skin" color={this.parts.skin.color} onClick={this.openColorPicker} />
+							<PartRow part="Hair Front" label="Hair (Front)" editor={this} />
+							<PartRow part="Hair Back" label="Hair (Back)" editor={this} />
+							<PartRow part="Facial Hair" editor={this} />
 						</div>
 					);
 				break;
@@ -184,10 +253,32 @@ class EditorPanel extends React.Component {
 								</div>
 							);
 						break;
+						case 'footwear':
+							openPanel = (
+								<div id="footwear-panel">
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Gear</a>
+									<PartRow part="shoes" editor={this} />
+									<PartRow part="shins" editor={this} />
+									<PartRow part="laces" editor={this} />
+								</div>
+							);
+						break;
+						case 'accessories':
+							openPanel = (
+								<div id="accessories-panel">
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Gear</a>
+									<PartRow part="Knee Pads" editor={this} />
+									<PartRow part="Elbow Pads" editor={this} />
+									<PartRow part="wrist" editor={this} />
+								</div>
+							);
+						break;
 						default:
 							openPanel = (
 								<div id="gear-panel">
 									<a className="d-block arrow-link" onClick={() => this.openSubpanel('clothing')}>Clothing</a>
+									<a className="d-block arrow-link" onClick={() => this.openSubpanel('footwear')}>Footwear</a>
+									<a className="d-block arrow-link" onClick={() => this.openSubpanel('accessories')}>Accessories</a>
 								</div>
 							);
 						break;
@@ -237,9 +328,17 @@ class App extends React.Component {
 		this.slotGroups['Pant Legs'] = ["Far Upper Pant Leg","Near Upper Pant Leg","Far Lower Pant Leg","Near Lower Pant Leg"];
 		this.slotGroups.shoes = ["shoe_far","shoe_near"];
 		this.slotGroups.shins = ["Far Shin","Near Shin"];
+		this.slotGroups.laces = ["Far Laces","Near Laces"];
+		this.slotGroups.wrist = ["Far Wrist Accessory", "Near Wrist Accessory"];
 		this.slotGroups.trunks = ["trunks"];
 		this.slotGroups['Shirt Body'] = ['Shirt Body'];
+		this.slotGroups['Hair Front'] = ['Hair Front'];
+		this.slotGroups['Hair Back'] = ['Hair Back'];
+		this.slotGroups['Facial Hair'] = ['Facial Hair'];
+		this.slotGroups['Facial Hair'] = ['Facial Hair'];
 		this.slotGroups['Shirt Sleeves'] = ["Shirt Far Upper Sleeve","Shirt Near Upper Sleeve","Shirt Far Lower Sleeve","Shirt Near Lower Sleeve"];
+		this.slotGroups['Elbow Pads'] = ["Near Lower Elbow Pad", "Near Upper Elbow Pad", "Shirt Far Lower Elbow Pad", "Shirt Far Upper Elbow Pad"];
+		this.slotGroups['Knee Pads'] = ["Near Lower Knee Pad", "Near Upper Knee Pad", "Far Lower Knee Pad", "Far Upper Knee Pad"];
 	}
 	initCanvas () {
 		// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
@@ -335,7 +434,16 @@ class App extends React.Component {
 		// Wait until the AssetManager has loaded all resources, then load the skeletons.
 		if (this.assetManager.isLoadingComplete()) {
 			this.figure = this.loadFigure(this.spineAsset.defaultAnim, true);
-			this.setPartColor('skin',{ r: .75, g: .6, b: .5, a: 1});
+			this.skeleton = this.figure.skeleton;
+			// this.setPartColor('skin',{ r: .75, g: .6, b: .5, a: 1});
+			var editor = this.editor;
+			for (var part in editor.parts) {
+				var defaults = editor.parts[part];
+				this.setPartColor(part,defaults.color);
+				if (!!defaults.attachment) {
+					this.setPartStyle(part,defaults.attachment);
+				}
+			}
 			this.lastFrameTime = Date.now() / 1000;
 			requestAnimationFrame(this.renderFigure); // Loading is done, call render every frame.
 		} else {
@@ -358,10 +466,11 @@ class App extends React.Component {
 		if (!initialAnimation) {
 			initialAnimation = skeletonData.animations[0].name;
 		}
-		this.skeleton = new spine.Skeleton(skeletonData);
+		var skeleton = new spine.Skeleton(skeletonData);
 		if (this.spineAsset.skin) {
-			this.skeleton.setSkinByName(this.spineAsset.skin);
+			skeleton.setSkinByName(this.spineAsset.skin);
 		}
+		this.skeleton = skeleton;
 		var bounds = this.calculateSetupPoseBounds(this.skeleton);
 
 		// Create an AnimationState, and set the initial animation in looping mode.
@@ -399,9 +508,9 @@ class App extends React.Component {
 				this.editor.parts[part].attachment = attachment;
 			}
 		}
-	}
-	componentDidMount() {
-		this.initCanvas();
+		else {
+			// console.log('something missing',part,this.slotGroups[part]);
+		}
 	}
 	render() {
 		return (

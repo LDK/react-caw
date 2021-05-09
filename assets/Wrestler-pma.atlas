@@ -1,3 +1,4 @@
+
 Wrestler.png
 size: 1985,681
 format: RGBA8888
@@ -138,7 +139,7 @@ ColdStone/Left Eye 1
   index: -1
 ColdStone/Left Eye Closed
   rotate: false
-  xy: 1908, 6
+  xy: 1574, 7
   size: 46, 17
   orig: 46, 17
   offset: 0, 0
@@ -305,8 +306,8 @@ ColdStone/Mouth Shocked 1
   offset: 11, 0
   index: -1
 ColdStone/Mouth Smirk 1
-  rotate: true
-  xy: 1958, 383
+  rotate: false
+  xy: 1924, 165
   size: 38, 18
   orig: 40, 20
   offset: 2, 2
@@ -368,8 +369,8 @@ ColdStone/Right Eye 1
   offset: 0, 0
   index: -1
 ColdStone/Right Eye Closed
-  rotate: false
-  xy: 1574, 8
+  rotate: true
+  xy: 1960, 291
   size: 52, 16
   orig: 52, 16
   offset: 0, 0
@@ -596,5 +597,12 @@ ColdStone/transparent
   xy: 1571, 252
   size: 1, 1
   orig: 1, 1
+  offset: 0, 0
+  index: -1
+Male Wrestler Template/Southeast Facing/Right Arm SE/Right Lower Arm/Right Wrist/Right Wrist Tape 1
+  rotate: true
+  xy: 1960, 345
+  size: 76, 23
+  orig: 76, 23
   offset: 0, 0
   index: -1
