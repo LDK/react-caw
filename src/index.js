@@ -105,7 +105,7 @@ function PartRow(props) {
 		</div>
 	);
 }
-class EditorPanel extends React.Component {
+class EditorUI extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -290,7 +290,7 @@ class EditorPanel extends React.Component {
 			openPanel = (<ColorPicker onChange={ this.handleColorChange } editor={this} color={ rgb255(this.parts[this.state.selectedPart].color) } />);
 		}
 		return (
-			<div id="editorPanel">
+			<div id="editorUI">
 				<ul className="tabs">
 					<li className={(this.state.selectedPanel == 'general') ? ' selected' : '' }><a onClick={() => this.openPanel('general')} className="d-block">General</a></li>
 					<li className={(this.state.selectedPanel == 'physical') ? ' selected' : '' }><a onClick={() => this.openPanel('physical')} className="d-block">Physical</a></li>
@@ -515,7 +515,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<EditorPanel app={this} />
+				<EditorUI app={this} />
 			</div>
 		);
 	}

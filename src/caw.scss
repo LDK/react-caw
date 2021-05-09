@@ -72,10 +72,10 @@ canvas {
 @media (min-width:1800px) {
 }
 
-$editorPanelBg: #CCC;
-#editorPanel {
+$editorUIBg: #CCC;
+#editorUI {
 	border: 1px solid #DEDEDE;
-	background: $editorPanelBg;
+	background: $editorUIBg;
 	position: relative;
 	@include atleast_res($md) {
 		padding-left: 200px;
@@ -98,8 +98,8 @@ $editorPanelBg: #CCC;
 			background: white;
 			border-right: black;
 			&.selected {
-				background: $editorPanelBg;
-				border-right: $editorPanelBg;
+				background: $editorUIBg;
+				border-right: $editorUIBg;
 			}
 			a {
 				text-decoration: none !important;
