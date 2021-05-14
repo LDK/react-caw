@@ -125,6 +125,46 @@ class EditorUI extends React.Component {
 				scaleX: 1,
 				scaleY: 1
 			},
+			arm_upper_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_upper_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_lower_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_lower_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_upper_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_upper_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_lower_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_lower_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			hand_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			hand_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			}
 		};
 		this.handleColorChange = this.handleColorChange.bind(this);
 		this.handleStyleChange = this.handleStyleChange.bind(this);
@@ -171,8 +211,32 @@ class EditorUI extends React.Component {
 		this.setState({ selectedPart: partName })
 	}
 	updateTransform(part,transform,value) {
-		this.transforms[part][transform] = value;
-		this.props.app.skeleton.findBone(part).data[transform] = value;
+		if (typeof part == 'object') {
+			for (var i in part) {
+				if (typeof transform == 'object') {
+					for (var j in transform) {
+						this.transforms[part[i]][transform[j]] = value;
+						this.props.app.skeleton.findBone(part[i]).data[transform[j]] = value;
+					}
+				}
+				else {
+					this.transforms[part[i]][transform] = value;
+					this.props.app.skeleton.findBone(part[i]).data[transform] = value;
+				}
+			}
+		}
+		else {
+			if (typeof transform == 'object') {
+				for (var j in transform) {
+					this.transforms[part][transform[j]] = value;
+					this.props.app.skeleton.findBone(part).data[transform[j]] = value;
+				}
+			}
+			else {
+				this.transforms[part][transform] = value;
+				this.props.app.skeleton.findBone(part).data[transform] = value;
+			}
+		}
 		this.setState({ updated: Date.now });
 	}
 	componentDidMount() {
@@ -194,18 +258,25 @@ class EditorUI extends React.Component {
 					switch (this.state.subpanel) {
 						case 'body':
 							openPanel = (
-								<div id="body-panel">
-									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
-									<Range label="Torso Length" inputClass="torso-scaleX col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('torso','scaleX',event.target.value) }} min="1.05" max="1.45" step=".05" value={this.transforms.torso.scaleX} />
-									<Range label="Torso Width" inputClass="torso-scaleY col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('torso','scaleY',event.target.value) }} min=".9" max="1.6" step=".05" value={this.transforms.torso.scaleY} />
+								<div id="body-panel" className="row">
+									<a className="d-block arrow-link-back col-12" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
+									<div className="part-group col-6 p-3" rel="torso">
+										<Range label="Torso Length" inputClass="torso-scaleX col-10 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('torso','scaleX',event.target.value) }} min="1.1" max="1.45" step=".05" value={this.transforms.torso.scaleX} />
+										<Range label="Torso Width" inputClass="torso-scaleY col-10 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('torso','scaleY',event.target.value) }} min=".9" max="1.6" step=".05" value={this.transforms.torso.scaleY} />
+									</div>
+									<div className="part-group col-6 p-3" rel="arms">
+										<Range label="Arm Length" inputClass="arms-scaleX col-10 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform(['arm_upper_near','arm_upper_far','arm_lower_near','arm_lower_far'],'scaleX',event.target.value) }} min=".95" max="1.3" step=".05" value={this.transforms.arm_upper_near.scaleX} />
+										<Range label="Arm Width" inputClass="arms-scaleY col-10 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform(['arm_upper_far','arm_upper_near'],'scaleY',event.target.value) }} min="1" max="1.25" step=".05" value={this.transforms.arm_upper_near.scaleY} />
+										<Range label="Hand Size" inputClass="hands-scale col-10 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform(['hand_far','hand_near'],['scaleY','scaleX'],event.target.value) }} min="1" max="1.15" step=".01" value={this.transforms.hand_far.scaleY} />
+									</div>
 								</div>
 							);
 						break;
 						case 'head':
 							openPanel = (
 								<div id="head-panel">
-									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>									<Range label="Head Length" inputClass="Head-scaleX col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('Head','scaleX',event.target.value) }} min=".9" max="1.1" step=".01" value={this.transforms.Head.scaleX} />
-									<Range label="Head Width" inputClass="Head-scaleY col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('Head','scaleY',event.target.value) }} min=".95" max="1.05" step=".01" value={this.transforms.Head.scaleY} />
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>									<Range label="Head Length" inputClass="Head-scaleX col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Head','scaleX',event.target.value) }} min=".9" max="1.1" step=".01" value={this.transforms.Head.scaleX} />
+									<Range label="Head Width" inputClass="Head-scaleY col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Head','scaleY',event.target.value) }} min=".95" max="1.05" step=".01" value={this.transforms.Head.scaleY} />
 									<PartRow part="Hair Front" label="Hair (Front)" editor={this} />
 									<PartRow part="Hair Back" label="Hair (Back)" editor={this} />
 									<PartRow part="Facial Hair" editor={this} />
@@ -216,6 +287,8 @@ class EditorUI extends React.Component {
 							openPanel = (
 								<div id="legs-panel">
 									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
+									<Range label="Leg Length" inputClass="legs-scaleX col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform(['leg_upper_near','leg_upper_far','leg_lower_near','leg_lower_far'],'scaleX',event.target.value) }} min=".95" max="1.3" step=".05" value={this.transforms.leg_upper_near.scaleX} />
+									<Range label="Leg Width" inputClass="legs-scaleY col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform(['leg_upper_far','leg_upper_near'],'scaleY',event.target.value) }} min="1" max="1.4" step=".04" value={this.transforms.leg_upper_near.scaleY} />
 								</div>
 							);
 						break;
