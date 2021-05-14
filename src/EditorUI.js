@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Config } from './config.js';
+import Range from './Range.js';
 import { SketchPicker } from 'react-color';
 
 function ucfirst(text) {
@@ -115,11 +116,22 @@ class EditorUI extends React.Component {
 				color: Config.DEFAULT_COLORS['Elbow Pads']
 			}
 		};
+		this.transforms = {
+			torso: {
+				scaleX: 1.2,
+				scaleY: 1.15
+			},
+			Head: {
+				scaleX: 1,
+				scaleY: 1
+			},
+		};
 		this.handleColorChange = this.handleColorChange.bind(this);
 		this.handleStyleChange = this.handleStyleChange.bind(this);
 		this.openColorPicker = this.openColorPicker.bind(this);
 		this.openPanel = this.openPanel.bind(this);
 		this.openSubpanel = this.openSubpanel.bind(this);
+		this.updateTransform = this.updateTransform.bind(this);
 		this.closeColorPicker = this.closeColorPicker.bind(this);
 		this.props.app.editor = this;
 	}
@@ -132,25 +144,21 @@ class EditorUI extends React.Component {
 		this.props.app.setPartColor(this.state.selectedPart,newColor);
 	}
 	openPanel(panelName) {
-		console.log('openPanel: set editor state');
 		this.setState({ selectedPanel: panelName, colorPickerOpen: false, subpanel: false });
 	}
 	openColorPicker(event) {
 		var part = event.target.attributes['data-part'].value;
-		console.log('openColorPicker: set editor state');
 		this.setState({
 			colorPickerOpen: true,
 			selectedPart: part
 		});
 	}
 	closeColorPicker() {
-		console.log('closeColorPicker: set editor state');
 		this.setState({
 			colorPickerOpen: false
 		});
 	}
 	openSubpanel(panel) {
-		console.log('openSubpanel: set editor state');
 		this.setState({ colorPickerOpen: false, subpanel: panel });
 	}
 	handleStyleChange(event) {
@@ -160,8 +168,12 @@ class EditorUI extends React.Component {
 			this.parts[partName] = {};
 		}
 		this.props.app.setPartStyle(partName,attachment);
-		console.log('handle style change: set editor state');
 		this.setState({ selectedPart: partName })
+	}
+	updateTransform(part,transform,value) {
+		this.transforms[part][transform] = value;
+		this.props.app.skeleton.findBone(part).data[transform] = value;
+		this.setState({ updated: Date.now });
 	}
 	componentDidMount() {
 		this.props.app.initCanvas();
@@ -179,15 +191,46 @@ class EditorUI extends React.Component {
 					);
 				break;
 				case 'physical':
-					openPanel = (
-						<div id="physical-panel">
-							<label>Skin Color</label>
-							<ColorSwatch part="skin" color={this.parts.skin.color} onClick={this.openColorPicker} />
-							<PartRow part="Hair Front" label="Hair (Front)" editor={this} />
-							<PartRow part="Hair Back" label="Hair (Back)" editor={this} />
-							<PartRow part="Facial Hair" editor={this} />
-						</div>
-					);
+					switch (this.state.subpanel) {
+						case 'body':
+							openPanel = (
+								<div id="body-panel">
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
+									<Range label="Torso Length" inputClass="torso-scaleX col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('torso','scaleX',event.target.value) }} min="1.05" max="1.45" step=".05" value={this.transforms.torso.scaleX} />
+									<Range label="Torso Width" inputClass="torso-scaleY col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('torso','scaleY',event.target.value) }} min=".9" max="1.6" step=".05" value={this.transforms.torso.scaleY} />
+								</div>
+							);
+						break;
+						case 'head':
+							openPanel = (
+								<div id="head-panel">
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>									<Range label="Head Length" inputClass="Head-scaleX col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('Head','scaleX',event.target.value) }} min=".9" max="1.1" step=".01" value={this.transforms.Head.scaleX} />
+									<Range label="Head Width" inputClass="Head-scaleY col-8 px-0 mx-auto" meterClass="pl-2" callback={() => { this.updateTransform('Head','scaleY',event.target.value) }} min=".95" max="1.05" step=".01" value={this.transforms.Head.scaleY} />
+									<PartRow part="Hair Front" label="Hair (Front)" editor={this} />
+									<PartRow part="Hair Back" label="Hair (Back)" editor={this} />
+									<PartRow part="Facial Hair" editor={this} />
+								</div>
+							);
+						break;
+						case 'legs':
+							openPanel = (
+								<div id="legs-panel">
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
+								</div>
+							);
+						break;
+						default:
+							openPanel = (
+								<div id="physical-panel">
+									<label>Skin Color</label>
+									<ColorSwatch part="skin" color={this.parts.skin.color} onClick={this.openColorPicker} />
+									<a className="d-block arrow-link" onClick={() => this.openSubpanel('head')}>Head</a>
+									<a className="d-block arrow-link" onClick={() => this.openSubpanel('body')}>Body</a>
+									<a className="d-block arrow-link" onClick={() => this.openSubpanel('legs')}>Legs</a>
+								</div>
+							);
+						break;
+					}
 				break;
 				case 'gear':
 					switch (this.state.subpanel) {

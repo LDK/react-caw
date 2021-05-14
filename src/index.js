@@ -126,6 +126,14 @@ class App extends React.Component {
 					this.setPartStyle(part,defaults.attachment);
 				}
 			}
+			for (var part in editor.transforms) {
+				var boneData = this.skeleton.findBone(part).data;
+				for (var transform in editor.transforms[part]) {
+					if (!!boneData[transform] && boneData[transform] != editor.transforms[part][transform]) {
+						boneData[transform] = editor.transforms[part][transform];
+					}
+				}
+			}
 			this.lastFrameTime = Date.now() / 1000;
 			this.animInterval = setInterval(this.cycleAnimation,5000);
 			requestAnimationFrame(this.renderFigure); // Loading is done, call render every frame.

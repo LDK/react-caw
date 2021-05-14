@@ -24,6 +24,12 @@ $hd: 1800px;
         @include atmost_res($to) { @content; } 
     }
 }
+@mixin part_label {
+	label {
+		font-size: 1rem;
+		font-weight: 400;
+	}
+}
 
 
 * { margin: 0; padding: 0; }
@@ -117,10 +123,10 @@ $editorUIBg: #CCC;
 		border-radius: 25%;
 	}
 	.partRow {
-		label {
-			font-size: 1rem;
-			font-weight: 400;
-		}
+		@include part_label();
+	}
+	.meter {
+		@include part_label();
 	}
 }
 
