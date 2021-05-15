@@ -28,7 +28,7 @@ export const Config = {
 		atlasFile: "assets/Wrestler-pma.atlas",
 		skin: 'Male Wrestler'
 	},
-	animationLoop: ['idle','idle','walk','walk2','run'],
+	animationLoop: ['idle','idle','idle','idle','idle','idle','idle','idle','walk','walk','walk','walk','walk2','walk2','walk2','walk2','run','run','run','run','run','run','punch1','punch3','punch2','Quick Headbutt'],
 	PART_STYLES: {
 		'Shirt Body': ['None','Style 1','Bodysuit'],
 		'Shirt Sleeves': ['None','Style 1','Bodysuit'],

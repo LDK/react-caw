@@ -18,6 +18,7 @@ class App extends React.Component {
 		this.setPartColor = this.setPartColor.bind(this);
 		this.setPartStyle = this.setPartStyle.bind(this);
 		this.setAnimation = this.setAnimation.bind(this);
+		this.queueAnimation = this.queueAnimation.bind(this);
 		this.cycleAnimation = this.cycleAnimation.bind(this);
 		this.calculateSetupPoseBounds = this.calculateSetupPoseBounds.bind(this);
 		this.mvp = new spine.webgl.Matrix4();
@@ -117,6 +118,21 @@ class App extends React.Component {
 		if (this.assetManager.isLoadingComplete()) {
 			this.figure = this.loadFigure(Config.spineAsset.defaultAnim, true);
 			this.skeleton = this.figure.skeleton;
+			var app = this;
+			this.figure.state.addListener({
+				event: function( trackIndex, event ){
+
+				},
+				complete: function( trackIndex, loopCount ){
+					app.cycleAnimation();
+				},
+				start: function( trackIndex ){
+
+				},
+				end: function( trackIndex ){
+
+				}
+			})
 			// this.setPartColor('skin',{ r: .75, g: .6, b: .5, a: 1});
 			var editor = this.editor;
 			for (var part in editor.parts) {
@@ -135,7 +151,6 @@ class App extends React.Component {
 				}
 			}
 			this.lastFrameTime = Date.now() / 1000;
-			this.animInterval = setInterval(this.cycleAnimation,5000);
 			requestAnimationFrame(this.renderFigure); // Loading is done, call render every frame.
 		} else {
 			requestAnimationFrame(this.loadSkeleton);
@@ -167,6 +182,7 @@ class App extends React.Component {
 		// Create an AnimationState, and set the initial animation in looping mode.
 		var animationStateData = new spine.AnimationStateData(this.skeleton.data);
 		var animationState = new spine.AnimationState(animationStateData);
+
 		animationState.setAnimation(0, initialAnimation, true);
 	
 
@@ -179,7 +195,10 @@ class App extends React.Component {
 		if (this.animIndex >= Config.animationLoop.length) {
 			this.animIndex = 0;
 		}
-		this.setAnimation(Config.animationLoop[this.animIndex]);
+		var current = this.figure.state.getCurrent(0).animation.name;
+		if (Config.animationLoop[this.animIndex] != current) {
+			this.queueAnimation(Config.animationLoop[this.animIndex],true);
+		}
 	}
 	setSlotColor (slotName,color) {
 		var slotColor = this.skeleton.findSlot(slotName).color;
@@ -200,6 +219,10 @@ class App extends React.Component {
 	}
 	setAnimation(animation) {
 		this.figure.state.setAnimation(0, animation, true);
+	}
+	queueAnimation(animation,loop) {
+		loop = !!loop || false;
+		this.figure.state.addAnimation(0, animation, loop, 0);
 	}
 	setPartStyle(part,attachment) {
 		if (!!part && !!Config.slotGroups[part]) {
