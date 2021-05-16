@@ -24,8 +24,8 @@ export const Config = {
 	slotGroups: slotGroups,
 	spineAsset: {
 		defaultAnim: 'idle',
-		skelFile: "assets/Wrestler-pro.skel",
-		atlasFile: "assets/Wrestler-pma.atlas",
+		skelFile: "assets/Wrestler.skel",
+		atlasFile: "assets/Wrestler.atlas.txt",
 		skin: 'Male Wrestler'
 	},
 	animationLoop: ['idle','idle','idle','idle','idle','idle','idle','idle','walk','walk','walk','walk','walk2','walk2','walk2','walk2','run','run','run','run','run','run','punch1','punch3','punch2','Quick Headbutt'],
