@@ -10,6 +10,7 @@ class App extends React.Component {
 		this.state = {
 
 		};
+		this.restingFace = 'Smug 1';
 		this.initCanvas = this.initCanvas.bind(this);
 		this.loadSkeleton = this.loadSkeleton.bind(this);
 		this.loadFigure = this.loadFigure.bind(this);
@@ -18,6 +19,7 @@ class App extends React.Component {
 		this.setPartColor = this.setPartColor.bind(this);
 		this.setPartStyle = this.setPartStyle.bind(this);
 		this.setAnimation = this.setAnimation.bind(this);
+		this.setFace = this.setFace.bind(this);
 		this.queueAnimation = this.queueAnimation.bind(this);
 		this.cycleAnimation = this.cycleAnimation.bind(this);
 		this.calculateSetupPoseBounds = this.calculateSetupPoseBounds.bind(this);
@@ -113,6 +115,21 @@ class App extends React.Component {
 		this.skeleton.getBounds(offset, size, []);
 		return { offset: offset, size: size };
 	}
+	spineEventHandler(eventName, trackIndex) {
+		if (eventName.indexOf('Face:') !== -1) {
+			var tmp = eventName.split(': ');
+			var faceName = tmp[1];
+			this.setFace(faceName);
+		}
+		else {
+			switch (eventName) {
+				case 'Reset Face':
+					this.setFace(this.restingFace);
+				break;
+			}
+		}
+		
+	}
 	loadSkeleton () {
 		// Wait until the AssetManager has loaded all resources, then load the skeletons.
 		if (this.assetManager.isLoadingComplete()) {
@@ -121,7 +138,7 @@ class App extends React.Component {
 			var app = this;
 			this.figure.state.addListener({
 				event: function( trackIndex, event ){
-
+					app.spineEventHandler(event.data.name, trackIndex);
 				},
 				complete: function( trackIndex, loopCount ){
 					app.cycleAnimation();
@@ -184,7 +201,7 @@ class App extends React.Component {
 		var animationState = new spine.AnimationState(animationStateData);
 
 		animationState.setAnimation(0, initialAnimation, true);
-	
+		animationState.setAnimation(1, 'Face: Smug 1', false);
 
 		// Pack everything up and return to caller.
 		return { skeleton: this.skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
@@ -198,6 +215,12 @@ class App extends React.Component {
 		var current = this.figure.state.getCurrent(0).animation.name;
 		if (Config.animationLoop[this.animIndex] != current) {
 			this.queueAnimation(Config.animationLoop[this.animIndex],true);
+		}
+	}
+	setFace(faceName) {
+		var current = this.figure.state.getCurrent(1).animation.name;
+		if ('Face: '+faceName != current) {
+			this.figure.state.setAnimation(1, 'Face: '+faceName, false);
 		}
 	}
 	setSlotColor (slotName,color) {
