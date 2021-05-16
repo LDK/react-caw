@@ -18,7 +18,7 @@ slotGroups['Facial Hair'] = ['Facial Hair'];
 slotGroups['Shirt Sleeves'] = ["Shirt Far Upper Sleeve","Shirt Near Upper Sleeve","Shirt Far Lower Sleeve","Shirt Near Lower Sleeve"];
 slotGroups['Elbow Pads'] = ["Near Lower Elbow Pad", "Near Upper Elbow Pad", "Shirt Far Lower Elbow Pad", "Shirt Far Upper Elbow Pad"];
 slotGroups['Knee Pads'] = ["Near Lower Knee Pad", "Near Upper Knee Pad", "Far Lower Knee Pad", "Far Upper Knee Pad"];
-
+slotGroups['Eyebrows'] = ['Left Eyebrow'];
 
 export const Config = {
 	slotGroups: slotGroups,
@@ -44,6 +44,68 @@ export const Config = {
 		'Elbow Pads': ['None','Style 1'],
 		'Knee Pads': ['None','Style 1']
 	},
+	DEFAULT_TRANSFORMS: {
+			torso: {
+				scaleX: 1.2,
+				scaleY: 1.15
+			},
+			Head: {
+				scaleX: 1,
+				scaleY: 1
+			},
+			arm_upper_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_upper_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_lower_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			arm_lower_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_upper_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_upper_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_lower_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			leg_lower_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			hand_near: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			hand_far: {
+				scaleX: 1.1,
+				scaleY: 1.1
+			},
+			'Left Eyebrow': {
+				scaleX: .95,
+				scaleY: .95,
+				y: -120.7,
+				x: 68.25
+			},
+			'Right Eyebrow': {
+				scaleX: .95,
+				scaleY: .95,
+				y: -83.15,
+				x: 77.4
+			}
+		},
 	DEFAULT_COLORS : {
 		'Shirt Body': rgb(1,1,1),
 		'Shirt Sleeves': rgb(1,1,1),

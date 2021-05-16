@@ -116,56 +116,7 @@ class EditorUI extends React.Component {
 				color: Config.DEFAULT_COLORS['Elbow Pads']
 			}
 		};
-		this.transforms = {
-			torso: {
-				scaleX: 1.2,
-				scaleY: 1.15
-			},
-			Head: {
-				scaleX: 1,
-				scaleY: 1
-			},
-			arm_upper_near: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			arm_upper_far: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			arm_lower_near: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			arm_lower_far: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			leg_upper_near: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			leg_upper_far: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			leg_lower_near: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			leg_lower_far: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			hand_near: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			},
-			hand_far: {
-				scaleX: 1.1,
-				scaleY: 1.1
-			}
-		};
+		this.transforms = Config.DEFAULT_TRANSFORMS;
 		this.handleColorChange = this.handleColorChange.bind(this);
 		this.handleStyleChange = this.handleStyleChange.bind(this);
 		this.openColorPicker = this.openColorPicker.bind(this);
@@ -211,6 +162,7 @@ class EditorUI extends React.Component {
 		this.setState({ selectedPart: partName })
 	}
 	updateTransform(part,transform,value) {
+		value = parseFloat(value);
 		if (typeof part == 'object') {
 			for (var i in part) {
 				if (typeof transform == 'object') {
@@ -233,6 +185,12 @@ class EditorUI extends React.Component {
 				}
 			}
 			else {
+				var offset;
+				if (part == 'Eyebrows') {
+					part = 'Left Eyebrow';
+					offset = Config.DEFAULT_TRANSFORMS[part][transform] - Config.DEFAULT_TRANSFORMS['Right Eyebrow'][transform];
+					this.updateTransform('Right Eyebrow',transform,value - offset);
+				}
 				this.transforms[part][transform] = value;
 				this.props.app.skeleton.findBone(part).data[transform] = value;
 			}
@@ -275,7 +233,9 @@ class EditorUI extends React.Component {
 						case 'head':
 							openPanel = (
 								<div id="head-panel">
-									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>									<Range label="Head Length" inputClass="Head-scaleX col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Head','scaleX',event.target.value) }} min=".9" max="1.1" step=".01" value={this.transforms.Head.scaleX} />
+									<a className="d-block arrow-link-back" onClick={() => this.openSubpanel(false)}>Back to Physical</a>
+								<Range label="Eyebrow Placement" inputClass="Eyebrow-x col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Eyebrows','x',event.target.value) }} min="64.1" max="77.9" step=".2" value={this.transforms['Left Eyebrow'].x} />
+									<Range label="Head Length" inputClass="Head-scaleX col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Head','scaleX',event.target.value) }} min=".9" max="1.1" step=".01" value={this.transforms.Head.scaleX} />
 									<Range label="Head Width" inputClass="Head-scaleY col-8 px-0 mx-auto" meterClass="pl-2 d-none" callback={() => { this.updateTransform('Head','scaleY',event.target.value) }} min=".95" max="1.05" step=".01" value={this.transforms.Head.scaleY} />
 									<PartRow part="Hair Front" label="Hair (Front)" editor={this} />
 									<PartRow part="Hair Back" label="Hair (Back)" editor={this} />

@@ -194,6 +194,7 @@ class App extends React.Component {
 			skeleton.setSkinByName(Config.spineAsset.skin);
 		}
 		this.skeleton = skeleton;
+		// console.log('skeleton',this.skeleton);
 		var bounds = this.calculateSetupPoseBounds(this.skeleton);
 
 		// Create an AnimationState, and set the initial animation in looping mode.
